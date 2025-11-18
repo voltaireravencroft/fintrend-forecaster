@@ -43,7 +43,8 @@ with st.sidebar:
     show_macd = st.checkbox("MACD (12,26,9)", value=True)
 
     st.subheader("Forecast")
-    model_choice = st.radio("Model", ["Linear Regression (last N days)", "ARIMA(1,1,1)"], index=0)
+    model_choice = st.radio("Model", ["Linear Regression (last N days)", "ARIMA(1,1,1) - disabled in MVP",], 
+                            index=0,)
     horizon = st.slider("Forecast horizon (days)", 5, 60, 30, 5)
     lookback = st.slider("Regression lookback (days)", 30, 240, 90, 10, help="Only for Linear Regression")
     
@@ -235,10 +236,21 @@ for sym in symbols:
 
 # Forecast
 
+fc = None
+
 if model_choice.startswith("Linear"):
-    fc = linear_regression_forecast(data, horizon=horizon, lookback=lookback)
-else:
-    fc = arima_forecast(data, horizon=horizon)
+    # ✅ Use the working linear model
+    fc = linear_regression_forecast(data, horizon, lookback)
+
+elif model_choice.startswith("ARIMA"):
+    # 🚫 ARIMA path is disabled for this MVP
+    st.warning(
+        "ARIMA is not wired up correctly yet in this MVP build, "
+        "so it is disabled for now.\n\n"
+        "The app currently uses a linear baseline model only."
+    )
+    st.stop()  # prevents any of the ARIMA code from running
+
 
 # Charts
 
