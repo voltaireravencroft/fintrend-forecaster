@@ -9,7 +9,7 @@ Future versions will expand the modeling options and UX.
 
 ## 🔗 Live App
 
-**Streamlit:** [https://YOUR-STREAMLIT-URL-HERE](https://voltaireravencroft-fintrend-forecaster-app-a2btfx.streamlit.app)
+**Streamlit:** [https://voltaireravencroft-fintrend-forecaster-app-a2btfx.streamlit.app]
 
 > Best viewed on desktop. Mobile works, but the charts deserve more screen real estate.
 
